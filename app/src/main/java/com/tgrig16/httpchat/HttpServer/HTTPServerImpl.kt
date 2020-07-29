@@ -1,14 +1,8 @@
-package com.hashcode.serverapp
+package com.tgrig16.httpchat.HttpServer
 
-import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import androidx.appcompat.app.AppCompatActivity
 import com.sun.net.httpserver.HttpExchange
 import com.sun.net.httpserver.HttpHandler
 import com.sun.net.httpserver.HttpServer
-import com.tgrig16.httpchat.R
-import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 import java.io.IOException
 import java.io.InputStream
@@ -16,45 +10,11 @@ import java.net.InetSocketAddress
 import java.util.*
 import java.util.concurrent.Executors
 
-
-class MainActivity : AppCompatActivity() {
-
-    private var serverUp = false
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val port = 5500
-        serverButton.setOnClickListener {
-            serverUp = if(!serverUp){
-
-                startServer(port)
-                true
-            } else{
-                stopServer()
-                false
-            }
-
-        }
-
-    }
-
-    private fun streamToString(inputStream: InputStream): String {
-        val s = Scanner(inputStream).useDelimiter("\\A")
-        return if (s.hasNext()) s.next() else ""
-    }
-
-    private fun sendResponse(httpExchange: HttpExchange, responseText: String){
-        httpExchange.sendResponseHeaders(200, responseText.length.toLong())
-        val os = httpExchange.responseBody
-        os.write(responseText.toByteArray())
-        os.close()
-    }
-
+class HTTPServerImpl(val view : HTTPServerActivity) : HTTPServerContract.Presenter {
     private var mHttpServer: HttpServer? = null
 
 
-    private fun startServer(port: Int) {
+    override fun startServer(port: Int) {
         try {
             mHttpServer = HttpServer.create(InetSocketAddress(port), 0)
             mHttpServer!!.executor = Executors.newCachedThreadPool()
@@ -62,23 +22,21 @@ class MainActivity : AppCompatActivity() {
             mHttpServer!!.createContext("/index", rootHandler)
             mHttpServer!!.createContext("/messages", messageHandler)
             mHttpServer!!.start()//startServer server;
-            serverTextView.text = "server_running"
-            serverButton.text = "stop_server"
+            view.setButtonText("server down")
+            view.setTextView("server is start now")
         } catch (e: IOException) {
             e.printStackTrace()
         }
-
     }
 
-    private fun stopServer() {
+    override fun stopServer() {
         if (mHttpServer != null){
             mHttpServer!!.stop(0)
-            serverTextView.text = "server_down"
-            serverButton.text = "start_server"
+            view.setButtonText("server start")
+            view.setTextView("server is down now")
         }
     }
 
-    // Handler for root endpoint
     private val rootHandler = HttpHandler { exchange ->
         run {
             // Get request method
@@ -114,4 +72,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun streamToString(inputStream: InputStream): String {
+        val s = Scanner(inputStream).useDelimiter("\\A")
+        return if (s.hasNext()) s.next() else ""
+    }
+
+    private fun sendResponse(httpExchange: HttpExchange, responseText: String){
+        httpExchange.sendResponseHeaders(200, responseText.length.toLong())
+        val os = httpExchange.responseBody
+        os.write(responseText.toByteArray())
+        os.close()
+    }
+
 }

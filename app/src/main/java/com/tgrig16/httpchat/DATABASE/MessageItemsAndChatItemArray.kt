@@ -5,8 +5,9 @@ import androidx.room.Relation
 
 class MessageItemsAndChatItemArray
 {
+
     @Embedded
-    var item: MessageItem? = null
-    @Relation(parentColumn = "remoteId", entityColumn = "parentId", entity = ChatItem::class)
-    var chats: MutableList<ChatItem> = ArrayList()
+    var item: ChatItem? = null
+    @Relation(parentColumn = "remoteId", entityColumn = "parentId", entity = MessageItem::class)
+    var chats: MutableList<MessageItem> = ArrayList()
 }

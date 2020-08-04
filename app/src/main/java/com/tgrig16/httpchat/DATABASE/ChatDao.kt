@@ -14,20 +14,21 @@ interface ChatDao {
     fun loadChat(id: Long): Single<MessageItemsAndChatItemArray>
 
     @Insert
-    fun addMessageToChat(item: MessageItem): Single<Long>
+    fun addMessageToChat(item: ChatItem): Single<Long>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addChatToList(items: List<ChatItem>)
+    @Insert
+    fun addChatToList(items: List<MessageItem>)
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateChatItem(item: MessageItem)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateChatItems(item: List<ChatItem>)
+    suspend fun updateChatItem(item: ChatItem)
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateChatItems(item: List<MessageItem>)
 
     @Delete
-    suspend fun removeMessageFromChat(item: MessageItem)
+    suspend fun removeMessageFromChat(item: ChatItem)
 
     @Delete
-    suspend fun removeChatToList(item: List<ChatItem>)
+    suspend fun removeChatToList(item: List<MessageItem>)
 }

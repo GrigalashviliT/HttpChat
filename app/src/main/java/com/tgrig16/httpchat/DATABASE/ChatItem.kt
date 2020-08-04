@@ -1,26 +1,16 @@
 package com.tgrig16.httpchat.DATABASE
 
-import androidx.room.*
-import androidx.room.ForeignKey.CASCADE
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-
-@Entity(
-    tableName = "chat", foreignKeys = [
-        ForeignKey(
-            entity = MessageItem::class,
-            parentColumns = arrayOf("remoteId"),
-            childColumns = arrayOf("parentId"),
-            onDelete = CASCADE
-        )
-    ], indices = [
-        Index(value = ["parentId"])
-    ]
-)
+@Entity(tableName = "messages")
 data class ChatItem(
-    var personName: String,
-    var parentId: Long
-) {
+    var parentId: Long,
+    var personName: String
+)
+{
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "localId")
-    var id: Long = 0
+    @ColumnInfo(name = "remoteId")
+    var id:Long = 0
 }

@@ -12,11 +12,11 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".HttpServer.HTTPServerActivity" />
+        <activity android:name=".WelcomePage.WelcomeActivity" />
 
         <activity android:name=".CheckingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

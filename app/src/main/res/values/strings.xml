@@ -4,4 +4,6 @@
     <string name="enter_your_nickname">Enter Your Nickname</string>
     <string name="what_i_do">What I Do</string>
     <string name="start">Start</string>
+    <string name="user_name">Enter Your NickName</string>
+    <string name="what_to_do">What I Do</string>
 </resources>

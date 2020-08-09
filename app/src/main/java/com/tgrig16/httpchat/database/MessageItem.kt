@@ -1,8 +1,7 @@
-package com.tgrig16.httpchat.DATABASE
+package com.tgrig16.httpchat.database
 
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
-
 
 @Entity(
     tableName = "chat", foreignKeys = [

@@ -17,7 +17,6 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-
             android:background="?attr/colorPrimary"
             android:fitsSystemWindows="true"
             android:minHeight="?attr/actionBarSize"
@@ -25,7 +24,7 @@
             app:titleTextColor="@android:color/white">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="36dp"
@@ -45,9 +44,9 @@
                 android:layout_marginTop="40dp"
                 android:text="TextView"
                 android:textColor="#D3CDCD"
-                app:layout_constraintBottom_toTopOf="@+id/chat_recycler"
+                app:layout_constraintBottom_toTopOf="@+id/chatRecycler"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/text" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -58,13 +57,10 @@
                 tools:srcCompat="@tools:sample/avatars" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/chat_recycler"
+        android:id="@+id/chatRecycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -87,8 +83,8 @@
         tools:ignore="MissingConstraints">
 
         <EditText
-            android:id="@+id/editTextPersonName"
-            android:layout_width="match_parent"
+            android:id="@+id/messageBox"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="16dp"
             android:layout_marginTop="0dp"
@@ -102,17 +98,13 @@
             android:scrollHorizontally="false" />
 
         <Button
-            android:id="@+id/send_button"
+            android:id="@+id/sendButton"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:background="@drawable/rounded_button"
             android:layout_marginEnd="30dp"
             android:text="" />
 
-
     </LinearLayout>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

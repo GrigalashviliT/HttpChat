@@ -1,38 +1,45 @@
-package com.tgrig16.httpchat.HttpServer
+package com.tgrig16.httpchat.httpServer
 
 import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.tgrig16.httpchat.R
-import kotlinx.android.synthetic.main.activity_main.*
-
 
 class HTTPServerActivity : AppCompatActivity() , HTTPServerContract.View {
 
+    private val port = 5500
     private var serverUp = false
-    lateinit var presenter: HTTPServerContract.Presenter
+    private lateinit var presenter: HTTPServerContract.Presenter
+    private lateinit var startButton: Button
+    private lateinit var textView: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val port = 5500
+        setContentView(R.layout.activity_http_server)
+
         presenter = HTTPServerImpl(this)
-        serverButton.setOnClickListener {
-            serverUp = if(!serverUp){
+
+        startButton = findViewById(R.id.serverButton)
+        startButton.setOnClickListener {
+            serverUp = if (!serverUp) {
                 presenter.startServer(port)
                 true
-            } else{
+            } else {
                 presenter.stopServer()
                 false
             }
-
         }
 
+        textView = findViewById(R.id.serverTextView)
     }
 
     override fun setTextView(text: String) {
-        serverTextView.text = text
+        textView.text = text
     }
 
     override fun setButtonText(text: String) {
-        serverButton.text = text
+        startButton.text = text
     }
+
 }

@@ -1,4 +1,4 @@
-package com.tgrig16.httpchat.DATABASE
+package com.tgrig16.httpchat.database
 
 import androidx.room.*
 import io.reactivex.Single
@@ -45,4 +45,5 @@ interface ChatDao {
 
     @Delete
     suspend fun removeChatToList(item: List<MessageItem>)
+
 }

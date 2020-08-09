@@ -1,6 +1,7 @@
-package com.tgrig16.httpchat.HttpServer
+package com.tgrig16.httpchat.httpServer
 
 interface HTTPServerContract {
+
     interface View {
         fun setTextView(text: String)
         fun setButtonText(text: String)
@@ -10,4 +11,5 @@ interface HTTPServerContract {
         fun startServer(port: Int)
         fun stopServer()
     }
+
 }

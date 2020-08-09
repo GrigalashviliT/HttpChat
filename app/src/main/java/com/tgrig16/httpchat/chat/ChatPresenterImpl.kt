@@ -1,20 +1,19 @@
-package com.tgrig16.httpchat.ChatHistory
+package com.tgrig16.httpchat.chat
 
 import android.icu.text.SimpleDateFormat
 import android.os.AsyncTask
 import android.os.Handler
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.tgrig16.httpchat.DATABASE.ChatDao
-import com.tgrig16.httpchat.DATABASE.ChatItem
-import com.tgrig16.httpchat.DATABASE.MessageItem
+import com.tgrig16.httpchat.database.ChatDao
+import com.tgrig16.httpchat.database.MessageItem
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ChatHistoryPresenterImpl (val view : ChatHistoryActivity): ChatHistoryContract.Presenter {
+class ChatPresenterImpl(val view : ChatActivity): ChatContract.Presenter {
+
     private lateinit var recyclerView: RecyclerView
     private  lateinit var adapter: ChatItemAdapter
     private lateinit var database: ChatDao

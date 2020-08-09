@@ -6,4 +6,9 @@
     <string name="start">Start</string>
     <string name="user_name">Enter Your NickName</string>
     <string name="what_to_do">What I Do</string>
+    <string name="message">Message</string>
+    <string name="test_time">20:20</string>
+    <string name="test_message">Hi, how are you?</string>
+    <string name="startServer">startServer</string>
+    <string name="server">Server</string>
 </resources>

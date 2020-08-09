@@ -1,4 +1,4 @@
-package com.tgrig16.httpchat.HttpServer
+package com.tgrig16.httpchat.httpServer
 
 import com.sun.net.httpserver.HttpExchange
 import com.sun.net.httpserver.HttpHandler
@@ -10,9 +10,9 @@ import java.net.InetSocketAddress
 import java.util.*
 import java.util.concurrent.Executors
 
-class HTTPServerImpl(val view : HTTPServerActivity) : HTTPServerContract.Presenter {
-    private var mHttpServer: HttpServer? = null
+class HTTPServerImpl(val view: HTTPServerActivity): HTTPServerContract.Presenter {
 
+    private var mHttpServer: HttpServer? = null
 
     override fun startServer(port: Int) {
         try {
@@ -44,10 +44,8 @@ class HTTPServerImpl(val view : HTTPServerActivity) : HTTPServerContract.Present
                 "GET" -> {
                     sendResponse(exchange, "Welcome to my server")
                 }
-
             }
         }
-
     }
 
     private val messageHandler = HttpHandler { httpExchange ->
@@ -66,9 +64,7 @@ class HTTPServerImpl(val view : HTTPServerActivity) : HTTPServerContract.Present
 
                     //for testing
                     sendResponse(httpExchange, jsonBody.toString())
-
                 }
-
             }
         }
     }

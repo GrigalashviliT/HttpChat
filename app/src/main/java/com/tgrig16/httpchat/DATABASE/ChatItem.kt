@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "messages")
 data class ChatItem(
-    var parentId: Long,
     var personName: String
 )
 {

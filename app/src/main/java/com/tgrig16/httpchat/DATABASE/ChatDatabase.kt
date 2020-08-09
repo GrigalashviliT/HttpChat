@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 
 
 @Database(entities = [ChatItem::class, MessageItem::class],
-    version = 2)
+    version = 5)
 abstract class ChatDatabase : RoomDatabase() {
     abstract fun getChatListDao(): ChatDao
 }

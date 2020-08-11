@@ -1,8 +1,11 @@
 package com.tgrig16.httpchat.httpServer
 
+import androidx.room.Room
 import com.sun.net.httpserver.HttpExchange
 import com.sun.net.httpserver.HttpHandler
 import com.sun.net.httpserver.HttpServer
+import com.tgrig16.httpchat.database.ChatDao
+import com.tgrig16.httpchat.database.ChatDatabase
 import org.json.JSONObject
 import java.io.IOException
 import java.io.InputStream
@@ -13,7 +16,7 @@ import java.util.concurrent.Executors
 class HTTPServerImpl(val view: HTTPServerActivity): HTTPServerContract.Presenter {
 
     private var mHttpServer: HttpServer? = null
-
+    private lateinit var database: ChatDao
     override fun startServer(port: Int) {
         try {
             mHttpServer = HttpServer.create(InetSocketAddress(port), 0)
@@ -23,10 +26,15 @@ class HTTPServerImpl(val view: HTTPServerActivity): HTTPServerContract.Presenter
             mHttpServer!!.createContext("/messages", messageHandler)
             mHttpServer!!.start()//startServer server;
             view.setButtonText("server down")
+            createDataBase()
             view.setTextView("server is start now")
         } catch (e: IOException) {
             e.printStackTrace()
         }
+    }
+
+    fun createDataBase() {
+        database = view.createDataBase()
     }
 
     override fun stopServer() {

@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.room.Room
 import com.tgrig16.httpchat.R
+import com.tgrig16.httpchat.database.ChatDao
+import com.tgrig16.httpchat.database.ChatDatabase
 
 class HTTPServerActivity : AppCompatActivity() , HTTPServerContract.View {
 
@@ -32,6 +35,11 @@ class HTTPServerActivity : AppCompatActivity() , HTTPServerContract.View {
         }
 
         textView = findViewById(R.id.serverTextView)
+    }
+
+    override fun createDataBase(): ChatDao {
+        return Room.databaseBuilder(this, ChatDatabase::class.java, "ChatDatabase")
+            .fallbackToDestructiveMigration().build().getChatListDao()
     }
 
     override fun setTextView(text: String) {

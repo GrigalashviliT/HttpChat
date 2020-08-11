@@ -1,10 +1,10 @@
-package com.tgrig16.httpchat.chat
+package com.tgrig16.httpchat.chatHistory
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tgrig16.httpchat.database.ChatDao
 
-interface ChatContract {
+interface ChatHistoryContract {
 
     interface View {
         fun getDataBase(): ChatDao
@@ -17,5 +17,4 @@ interface ChatContract {
         fun clickedSend()
         fun lazyLoader()
     }
-
 }

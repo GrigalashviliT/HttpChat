@@ -1,6 +1,6 @@
 package com.tgrig16.httpchat.checkingConnection
 
-import com.tgrig16.httpchat.entities.ConnectionStatus
+import com.tgrig16.httpchat.entities.ConnectionEntities
 import com.tgrig16.httpchat.network.API
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,9 +15,9 @@ class CheckingConnectionPresenterImpl(var view: CheckingConnectionContract.View)
     override fun checkConnection() {
         val call = api.checkConnection()
 
-        call.enqueue(object: Callback<ConnectionStatus> {
+        call.enqueue(object: Callback<ConnectionEntities> {
 
-            override fun onResponse(call: Call<ConnectionStatus>, response: Response<ConnectionStatus>) {
+            override fun onResponse(call: Call<ConnectionEntities>, response: Response<ConnectionEntities>) {
                 val statusSuccess = response.body()?.success
 
                 if (statusSuccess != null && statusSuccess) {
@@ -27,7 +27,7 @@ class CheckingConnectionPresenterImpl(var view: CheckingConnectionContract.View)
                 }
             }
 
-            override fun onFailure(call: Call<ConnectionStatus>, t: Throwable) {
+            override fun onFailure(call: Call<ConnectionEntities>, t: Throwable) {
                 view.displayError()
             }
 

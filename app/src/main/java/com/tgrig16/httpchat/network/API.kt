@@ -1,11 +1,14 @@
 package com.tgrig16.httpchat.network
 
-import android.util.Log
-import com.tgrig16.httpchat.entities.ConnectionStatus
+import com.tgrig16.httpchat.entities.ConnectionEntities
+import com.tgrig16.httpchat.entities.RegisterData
+import com.tgrig16.httpchat.entities.RegisterStatus
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 interface API {
 
@@ -18,6 +21,9 @@ interface API {
     }
 
     @GET("check-connection")
-    fun checkConnection(): Call<ConnectionStatus>
+    fun checkConnection(): Call<ConnectionEntities>
+
+    @POST("register")
+    fun registerUser(@Body data: RegisterData): Call<RegisterStatus>
 
 }

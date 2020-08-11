@@ -1,5 +1,5 @@
 package com.tgrig16.httpchat.entities
 
-data class ConnectionStatus(
+data class ConnectionEntities(
     val success: Boolean
 )

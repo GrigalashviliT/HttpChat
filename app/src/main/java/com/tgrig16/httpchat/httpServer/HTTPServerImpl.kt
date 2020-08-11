@@ -3,16 +3,11 @@ package com.tgrig16.httpchat.httpServer
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import android.util.Log
-import com.sun.net.httpserver.HttpExchange
-import com.sun.net.httpserver.HttpHandler
 import com.sun.net.httpserver.HttpServer
 import com.tgrig16.httpchat.handlers.ConnectionCheckingHandler
-import org.json.JSONObject
+import com.tgrig16.httpchat.handlers.RegisterUserHandler
 import java.io.IOException
-import java.io.InputStream
 import java.net.InetSocketAddress
-import java.util.*
 import java.util.concurrent.Executors
 
 class HTTPServerImpl: Service() {
@@ -34,6 +29,7 @@ class HTTPServerImpl: Service() {
             mHttpServer.executor = Executors.newCachedThreadPool()
 
             mHttpServer.createContext("/check-connection", ConnectionCheckingHandler().getHandler())
+            mHttpServer.createContext("/register", RegisterUserHandler(applicationContext).getHandler())
 
             mHttpServer.start()
         } catch (e: IOException) {

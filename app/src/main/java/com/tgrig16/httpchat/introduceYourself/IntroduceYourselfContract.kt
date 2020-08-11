@@ -4,7 +4,7 @@ interface IntroduceYourselfContract {
 
     interface Presenter {
         fun uploadImage()
-        fun clickStart(name: String, whatIDo: String)
+        fun clickStart(imageB64: String, name: String, whatIDo: String)
     }
 
 }

@@ -1,6 +1,7 @@
 package com.tgrig16.httpchat.database
 
 import androidx.room.*
+import com.tgrig16.httpchat.database.entities.User
 import io.reactivex.Single
 
 @Dao
@@ -45,5 +46,11 @@ interface ChatDao {
 
     @Delete
     suspend fun removeChatToList(item: List<MessageItem>)
+
+    @Insert
+    fun registerUser(user: User): Long
+
+    @Query("select id from users_table where nickname = :nickname")
+    fun getUserByNickname(nickname: String): Long?
 
 }

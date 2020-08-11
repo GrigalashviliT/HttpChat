@@ -20,8 +20,8 @@ class HTTPServerActivity : AppCompatActivity() , HTTPServerContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_http_server)
-
-        presenter = HTTPServerImpl(this)
+//
+//        presenter = HTTPServerImpl()
 
         startButton = findViewById(R.id.serverButton)
         startButton.setOnClickListener {

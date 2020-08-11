@@ -1,56 +1,38 @@
 package com.tgrig16.httpchat.database
 
 import androidx.room.*
+import com.tgrig16.httpchat.database.entities.Contact
+import com.tgrig16.httpchat.database.entities.Message
 import com.tgrig16.httpchat.database.entities.User
-import io.reactivex.Single
 
 @Dao
 interface ChatDao {
 
-    @Transaction
-    @Query("SELECT * FROM messages WHERE remoteId = :id")
-    fun loadChat(id: Long): Single<MessageItemsAndChatItemArray>
-
-    @Transaction
-    @Query("SELECT * FROM messages WHERE  personName = :personName and remoteId >= :start LIMIT 10 ")
-    fun loadChat(start: Long , personName: String): Single<MessageItemsAndChatItemArray>
-
-    @Transaction
-    @Query("SELECT * FROM messages   LIMIT (select count (*) FROM chat WHERE  localId >= :start and parentId = :parentId LIMIT 10) ")
-    fun loadStringList(start: Long , parentId: Long): Single<MessageItemsAndChatItemArray>
-
-
-    @Transaction
-    @Query("SELECT * FROM messages WHERE personName = :personName")
-    fun loadChat(personName: String): Single<MessageItemsAndChatItemArray>
-
-    @Transaction
-    @Query("SELECT remoteId FROM messages WHERE personName = :personName")
-    fun loadParentId(personName: String): Single<Long>
-
-    @Insert
-    fun addMessageToChat(item: ChatItem): Single<Long>
-
-    @Insert
-    fun addChatToList(items: List<MessageItem>)
-
-
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateChatItem(item: ChatItem)
-
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateChatItems(item: List<MessageItem>)
-
-    @Delete
-    suspend fun removeMessageFromChat(item: ChatItem)
-
-    @Delete
-    suspend fun removeChatToList(item: List<MessageItem>)
-
     @Insert
     fun registerUser(user: User): Long
 
-    @Query("select id from users_table where nickname = :nickname")
+    @Query("select * from users_table")
+    fun getAllUsers(): List<User>
+
+    @Query("select id from users_table where nickname = :nickname limit 1")
     fun getUserByNickname(nickname: String): Long?
+
+    @Insert
+    fun addContact(contact: Contact)
+
+    @Query("select secondUserId from contacts_table where firstUserId = :userId")
+    fun getUserContacts(userId: Long): List<Long>
+
+    @Delete
+    fun deleteContact(contact: Contact)
+
+    @Insert
+    fun addMessage(message: Message)
+
+    @Query("select * from messages_table where (senderId = :firstUseId and receiverId = :secondUserId) or (senderId = :secondUserId and receiverId = :firstUseId) order by time ASC")
+    fun getMessages(firstUseId: Long, secondUserId: Long): List<Message>
+
+    @Query("select * from messages_table where (senderId = :firstUseId and receiverId = :secondUserId) or (senderId = :secondUserId and receiverId = :firstUseId) order by time ASC limit 1")
+    fun getLastMessageBetween(firstUseId: Long, secondUserId: Long): Message
 
 }

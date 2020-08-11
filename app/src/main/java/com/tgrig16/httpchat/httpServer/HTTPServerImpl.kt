@@ -4,8 +4,7 @@ import com.sun.net.httpserver.HttpServer
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import com.tgrig16.httpchat.handlers.ConnectionCheckingHandler
-import com.tgrig16.httpchat.handlers.RegisterUserHandler
+import com.tgrig16.httpchat.handlers.*
 import java.io.IOException
 import java.net.InetSocketAddress
 import java.util.concurrent.Executors
@@ -30,6 +29,11 @@ class HTTPServerImpl: Service() {
 
             mHttpServer.createContext("/check-connection", ConnectionCheckingHandler().getHandler())
             mHttpServer.createContext("/register", RegisterUserHandler(applicationContext).getHandler())
+            mHttpServer.createContext("/users", RegisterUserHandler(applicationContext).getHandler())
+            mHttpServer.createContext("/contacts", ContactsHandler(applicationContext).getHandler())
+            mHttpServer.createContext("/send-message", MessageSentHandler(applicationContext).getHandler())
+            mHttpServer.createContext("/messages", MessagesHandler(applicationContext).getHandler())
+            mHttpServer.createContext("/last-message", LastMessageHandler(applicationContext).getHandler())
 
             mHttpServer.start()
         } catch (e: IOException) {

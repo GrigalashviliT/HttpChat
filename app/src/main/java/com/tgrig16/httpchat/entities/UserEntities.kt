@@ -1,11 +1,11 @@
 package com.tgrig16.httpchat.entities
 
-data class RegisterData(
+data class Users(
+    val users: List<User>
+)
+
+data class User(
     val imageB64: String,
     val nickname: String,
     val whatIDo: String
-)
-
-data class RegisterStatus(
-    val id: Long
 )

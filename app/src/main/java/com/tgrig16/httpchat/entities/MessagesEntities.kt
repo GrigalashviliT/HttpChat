@@ -9,10 +9,15 @@ data class Messages(
 data class Message(
     val senderId: Long,
     val receiverId: Long,
-    val time: Date,
+    val time: String,
     val text: String
 )
 
 data class MessageSentStatus(
     val success: Boolean
+)
+
+data class LastMessageRequest(
+    val first: Long ,
+    val second: Long
 )

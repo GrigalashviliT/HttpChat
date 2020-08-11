@@ -13,6 +13,7 @@ import com.amitshekhar.model.Response
 import com.tgrig16.httpchat.R
 import com.tgrig16.httpchat.database.ChatDao
 import com.tgrig16.httpchat.database.ChatDatabase
+import kotlinx.android.synthetic.main.activity_chat.*
 import java.nio.charset.Charset
 
 
@@ -26,25 +27,32 @@ class ChatActivity: ChatContract.View, AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
+        val myId = intent.getLongExtra("myId" , -1)
+        val secondId = intent.getLongExtra("secondId" , -1)
+        val personName = intent.getStringExtra("name")
+        person.text = personName
+        Log.e("myId" , myId.toString())
+        Log.e("secondId" , secondId.toString())
 
         recyclerView = findViewById(R.id.chatRecycler)
 
         val viewManager = LinearLayoutManager(this)
         presenter = ChatPresenterImpl(this)
         presenter.implementRecyclerView(viewManager , recyclerView)
-        presenter.viewDidLoad("ვიღაცა")
+        presenter.viewDidLoad(myId , secondId)
 
         messageBox = findViewById(R.id.messageBox)
 
         sendButton = findViewById(R.id.sendButton)
 
         sendButton.setOnClickListener {
-            presenter.clickedSend()
+            presenter.clickedSend(messageBox.text.toString() , myId , secondId)
+            messageBox.text.clear()
         }
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                if (!recyclerView.canScrollVertically(-10)) {
+                if (!recyclerView.canScrollVertically(0)) {
                     presenter.lazyLoader()
                 }
             }

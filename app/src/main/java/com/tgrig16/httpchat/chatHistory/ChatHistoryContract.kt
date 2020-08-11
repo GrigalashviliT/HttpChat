@@ -13,8 +13,9 @@ interface ChatHistoryContract {
 
     interface Presenter {
         fun implementRecyclerView(viewManager: LinearLayoutManager , recyclerView: RecyclerView)
-        fun viewDidLoad(personName: String)
+        fun viewDidLoad()
         fun clickedSend()
         fun lazyLoader()
+        fun fetchUsers()
     }
 }

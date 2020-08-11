@@ -8,7 +8,7 @@ import java.util.*
 data class Message (
     var senderId: Long,
     var receiverId: Long,
-    var time: Date,
+    var time: String,
     var text: String
 ){
     @PrimaryKey(autoGenerate = true)

@@ -29,10 +29,10 @@ interface ChatDao {
     @Insert
     fun addMessage(message: Message)
 
-    @Query("select * from messages_table where (senderId = :firstUseId and receiverId = :secondUserId) or (senderId = :secondUserId and receiverId = :firstUseId) order by time ASC")
+    @Query("select * from messages_table where (senderId = :firstUseId and receiverId = :secondUserId) or (senderId = :secondUserId and receiverId = :firstUseId) order by time DESC")
     fun getMessages(firstUseId: Long, secondUserId: Long): List<Message>
 
-    @Query("select * from messages_table where (senderId = :firstUseId and receiverId = :secondUserId) or (senderId = :secondUserId and receiverId = :firstUseId) order by time ASC limit 1")
-    fun getLastMessageBetween(firstUseId: Long, secondUserId: Long): Message
+    @Query("select * from messages_table where (senderId = :firstUseId and receiverId = :secondUserId) or (senderId = :secondUserId and receiverId = :firstUseId) order by time DESC limit 1")
+    fun getLastMessageBetween(firstUseId: Long, secondUserId: Long): Message?
 
 }

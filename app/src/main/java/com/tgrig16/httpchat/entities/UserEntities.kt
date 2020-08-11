@@ -7,5 +7,6 @@ data class Users(
 data class User(
     val imageB64: String,
     val nickname: String,
-    val whatIDo: String
+    val whatIDo: String,
+    val id: Long
 )

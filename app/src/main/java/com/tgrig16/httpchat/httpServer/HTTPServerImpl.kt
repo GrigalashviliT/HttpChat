@@ -29,7 +29,7 @@ class HTTPServerImpl: Service() {
 
             mHttpServer.createContext("/check-connection", ConnectionCheckingHandler().getHandler())
             mHttpServer.createContext("/register", RegisterUserHandler(applicationContext).getHandler())
-            mHttpServer.createContext("/users", RegisterUserHandler(applicationContext).getHandler())
+            mHttpServer.createContext("/users", UsersHandler(applicationContext).getHandler())
             mHttpServer.createContext("/contacts", ContactsHandler(applicationContext).getHandler())
             mHttpServer.createContext("/send-message", MessageSentHandler(applicationContext).getHandler())
             mHttpServer.createContext("/messages", MessagesHandler(applicationContext).getHandler())

@@ -16,7 +16,7 @@ class MessagesService(context: Context) {
         return database.getMessages(firstUserId, secondUserId)
     }
 
-    fun getLastMessage(firstUserId: Long, secondUserId: Long): Message {
+    fun getLastMessage(firstUserId: Long, secondUserId: Long): Message? {
         return database.getLastMessageBetween(firstUserId, secondUserId)
     }
 

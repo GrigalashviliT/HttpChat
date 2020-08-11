@@ -9,7 +9,7 @@ import com.tgrig16.httpchat.R
 
 class ChatItemAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private lateinit var data: List <MessageItem>
+    private  var data = ArrayList <MessageItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == 0) {
@@ -35,7 +35,10 @@ class ChatItemAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     fun setData(data: List <MessageItem> ){
-        this.data = data
+        this.data.clear()
+        data.forEach{
+            this.data.add(it)
+        }
         notifyDataSetChanged()
     }
 

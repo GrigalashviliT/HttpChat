@@ -9,7 +9,7 @@ import com.tgrig16.httpchat.database.entities.Contact
 import com.tgrig16.httpchat.database.entities.Message
 import com.tgrig16.httpchat.database.entities.User
 
-@Database(entities = [User::class, Contact::class, Message::class], version = 8)
+@Database(entities = [User::class, Contact::class, Message::class], version = 9)
 @TypeConverters(value = [Converters::class])
 abstract class ChatDatabase: RoomDatabase() {
     abstract fun getChatListDao(): ChatDao

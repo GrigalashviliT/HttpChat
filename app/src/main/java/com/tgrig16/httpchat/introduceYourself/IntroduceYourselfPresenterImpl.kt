@@ -41,7 +41,9 @@ class IntroduceYourselfPresenterImpl(val view : IntroduceYourselfActivity) : Int
                 val userId = response.body()?.id
 
                 if (userId != null) {
-                    view.startActivity(Intent(view.applicationContext, ChatHistoryActivity::class.java))
+                    val intent = Intent(view.applicationContext, ChatHistoryActivity::class.java)
+                    intent.putExtra("userId" , userId)
+                    view.startActivity(intent)
                 } else {
                     Toast.makeText(view.applicationContext,"Couldn't register. Please try again", Toast.LENGTH_SHORT).show()
                 }

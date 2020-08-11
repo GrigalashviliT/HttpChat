@@ -18,8 +18,7 @@ import androidx.room.ForeignKey.CASCADE
 data class MessageItem(
     var message: String,
     var isMyMessage: Boolean,
-    var time: String,
-    var parentId: Long
+    var time: String
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "localId")

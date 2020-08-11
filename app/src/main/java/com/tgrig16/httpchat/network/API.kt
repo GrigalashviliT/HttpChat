@@ -25,7 +25,7 @@ interface API {
     fun registerUser(@Body data: RegisterData): Call<RegisterStatus>
 
     @GET("users")
-    fun getUsers(): Call<RegisterStatus>
+    fun getUsers(): Call<Users>
 
     @GET("contacts")
     fun getContacts(@Body id: Long): Call<Contacts>
@@ -33,10 +33,10 @@ interface API {
     @POST("send-message")
     fun sendMessage(@Body message: Message): Call<MessageSentStatus>
 
-    @GET("messages")
-    fun getMessages(@Body firstUserId: Long, secondUserId: Long): Call<Messages>
+    @POST("messages")
+    fun getMessages(@Body lastMessageRequest: LastMessageRequest): Call<Messages>
 
-    @GET("last-message")
-    fun getLastMessage(@Body firstUserId: Long, secondUserId: Long): Call<Message>
+    @POST("last-message")
+    fun getLastMessage(@Body lastMessageRequest: LastMessageRequest): Call<Message>
 
 }

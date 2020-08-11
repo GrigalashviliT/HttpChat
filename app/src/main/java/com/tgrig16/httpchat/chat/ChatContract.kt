@@ -13,8 +13,8 @@ interface ChatContract {
 
     interface Presenter {
         fun implementRecyclerView(viewManager: LinearLayoutManager , recyclerView: RecyclerView)
-        fun viewDidLoad(personName: String)
-        fun clickedSend()
+        fun viewDidLoad(firstUser: Long , secondUser: Long)
+        fun clickedSend(message: String , myId : Long , yourId: Long)
         fun lazyLoader()
     }
 
